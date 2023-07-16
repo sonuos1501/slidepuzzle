@@ -31,6 +31,28 @@ dependencies:
   flutter:
     sdk: flutter
 
+  dartx: ^1.0.0
+  equatable: ^2.0.3
+  flex_color_scheme: ^4.1.1
+  flextras: ^0.0.2
+  flutter_hooks: ^0.18.2
+  flutter_portal: ^0.4.0
+  flutter_riverpod: ^1.0.3
+  flutter_styled_toast: ^2.0.0
+  flutter_svg: ^1.0.3
+  fpdart: ^0.0.12
+  fps_widget: ^1.0.1+1
+  freezed_annotation: ^1.1.0
+  gap: ^2.0.0
+  go_router: ^3.0.0
+  hive: ^2.0.5
+  hive_flutter: ^1.1.0
+  hooks_riverpod: ^1.0.3
+  intl: ^0.17.0
+  just_audio: ^0.9.18
+  just_audio_libwinmedia: ^0.0.4
+  line_icons: ^2.0.1
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -39,6 +61,17 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  build_runner: ^2.1.7
+  fake_async: ^1.2.0
+  fast_i18n: ^5.7.0
+  flutter_launcher_icons: 0.9.1
+  freezed: ^1.1.0
+  hive_generator: ^1.1.2
+  integration_test:
+    sdk: flutter
+  json_serializable: ^6.1.4
+  mocktail: ^0.2.0
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
