@@ -36,8 +36,8 @@ class MyHomePage extends ConsumerStatefulWidget {
 class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    // final counterController = ref.watch(counterProvider.notifier);
-    // final counter = ref.watch(counterProvider.select((value) => value.counter));
+    final counterController = ref.watch(counterProvider.notifier);
+    final counter = ref.watch(counterProvider.select((value) => value.count));
 
     return Scaffold(
       appBar: AppBar(
@@ -51,14 +51,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              'counter.toString()',
+              counter.toString(),
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: counterController.increment,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -66,9 +66,20 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   }
 }
 
-// final counterProvider = ChangeNotifierProvider<CounterImpl>((ref) => CounterImpl());
+final counterProvider = StateNotifierProvider.autoDispose<MainStateNotifier, MainState>((ref) => MainStateNotifier());
+
+class MainStateNotifier extends StateNotifier<MainState> {
+  MainStateNotifier() : super(MainState());
+
+  void increment() {
+    final count = state.count;
+    state = state.copyWith(count: count + 1);
+  }
+}
 
 @freezed
 class MainState with _$MainState {
-  factory MainState.counter(int count) = MainCounterState;
+  factory MainState({
+    @Default(0) int count,
+  }) = _MainState;
 }
