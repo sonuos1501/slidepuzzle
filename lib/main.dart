@@ -37,6 +37,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final counterController = ref.watch(counterProvider.notifier);
+    final isLoading = ref.watch(counterProvider.select((value) => value.isLoading));
     final counter = ref.watch(counterProvider.select((value) => value.count));
 
     return Scaffold(
@@ -50,10 +51,12 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              counter.toString(),
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            isLoading
+                ? const CircularProgressIndicator()
+                : Text(
+                    counter.toString(),
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
           ],
         ),
       ),
@@ -71,15 +74,18 @@ final counterProvider = StateNotifierProvider.autoDispose<MainStateNotifier, Mai
 class MainStateNotifier extends StateNotifier<MainState> {
   MainStateNotifier() : super(MainState());
 
-  void increment() {
+  void increment() async {
+    state = state.copyWith(isLoading: true);
+    await Future.delayed(const Duration(milliseconds: 5000));
     final count = state.count;
-    state = state.copyWith(count: count + 1);
+    state = state.copyWith(isLoading: false, count: count + 1);
   }
 }
 
 @freezed
 class MainState with _$MainState {
   factory MainState({
+    @Default(false) bool isLoading,
     @Default(0) int count,
   }) = _MainState;
 }

@@ -16,6 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$MainState {
+  bool get isLoading => throw _privateConstructorUsedError;
   int get count => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -28,7 +29,7 @@ abstract class $MainStateCopyWith<$Res> {
   factory $MainStateCopyWith(MainState value, $Res Function(MainState) then) =
       _$MainStateCopyWithImpl<$Res, MainState>;
   @useResult
-  $Res call({int count});
+  $Res call({bool isLoading, int count});
 }
 
 /// @nodoc
@@ -44,9 +45,14 @@ class _$MainStateCopyWithImpl<$Res, $Val extends MainState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? count = null,
   }) {
     return _then(_value.copyWith(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -62,7 +68,7 @@ abstract class _$$_MainStateCopyWith<$Res> implements $MainStateCopyWith<$Res> {
       __$$_MainStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int count});
+  $Res call({bool isLoading, int count});
 }
 
 /// @nodoc
@@ -76,9 +82,14 @@ class __$$_MainStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isLoading = null,
     Object? count = null,
   }) {
     return _then(_$_MainState(
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
       count: null == count
           ? _value.count
           : count // ignore: cast_nullable_to_non_nullable
@@ -90,15 +101,18 @@ class __$$_MainStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_MainState implements _MainState {
-  _$_MainState({this.count = 0});
+  _$_MainState({this.isLoading = false, this.count = 0});
 
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   @JsonKey()
   final int count;
 
   @override
   String toString() {
-    return 'MainState(count: $count)';
+    return 'MainState(isLoading: $isLoading, count: $count)';
   }
 
   @override
@@ -106,11 +120,13 @@ class _$_MainState implements _MainState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_MainState &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.count, count) || other.count == count));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, count);
+  int get hashCode => Object.hash(runtimeType, isLoading, count);
 
   @JsonKey(ignore: true)
   @override
@@ -120,8 +136,10 @@ class _$_MainState implements _MainState {
 }
 
 abstract class _MainState implements MainState {
-  factory _MainState({final int count}) = _$_MainState;
+  factory _MainState({final bool isLoading, final int count}) = _$_MainState;
 
+  @override
+  bool get isLoading;
   @override
   int get count;
   @override
