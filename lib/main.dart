@@ -69,6 +69,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 // final counterProvider = ChangeNotifierProvider<CounterImpl>((ref) => CounterImpl());
 
 @freezed
-class MainState extends _$MainState {
+class MainState with _$MainState {
   factory MainState.counter(int count) = MainCounterState;
 }
