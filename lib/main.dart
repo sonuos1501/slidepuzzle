@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'main.freezed.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -33,8 +36,8 @@ class MyHomePage extends ConsumerStatefulWidget {
 class _MyHomePageState extends ConsumerState<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    final counterController = ref.watch(counterProvider.notifier);
-    final counter = ref.watch(counterProvider.select((value) => value.counter));
+    // final counterController = ref.watch(counterProvider.notifier);
+    // final counter = ref.watch(counterProvider.select((value) => value.counter));
 
     return Scaffold(
       appBar: AppBar(
@@ -48,14 +51,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               'You have pushed the button this many times:',
             ),
             Text(
-              counter.toString(),
+              'counter.toString()',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: counterController.increment,
+        onPressed: () {},
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -63,22 +66,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   }
 }
 
-final counterProvider = ChangeNotifierProvider<CounterImpl>((ref) => CounterImpl());
+// final counterProvider = ChangeNotifierProvider<CounterImpl>((ref) => CounterImpl());
 
-abstract class Counter {
-  int get counter;
-
-  void increment();
-}
-
-class CounterImpl with Counter, ChangeNotifier {
-  int _counter = 0;
-  @override
-  int get counter => _counter;
-
-  @override
-  void increment() {
-    _counter++;
-    notifyListeners();
-  }
+@freezed
+class MainState extends _$MainState {
+  factory MainState.counter(int count) = MainCounterState;
 }
