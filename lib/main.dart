@@ -76,7 +76,7 @@ class MainStateNotifier extends StateNotifier<MainState> {
 
   void increment() async {
     state = state.copyWith(isLoading: true);
-    await Future.delayed(const Duration(milliseconds: 5000));
+    await Future.delayed(const Duration(milliseconds: 200));
     final count = state.count;
     state = state.copyWith(isLoading: false, count: count + 1);
   }
