@@ -24,8 +24,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routeInformationParser: App.router.routeInformationParser,
-      routerDelegate: App.router.routerDelegate,
+      routerConfig: App.router,
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => 'Not Found',
     );
