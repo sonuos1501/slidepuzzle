@@ -10,7 +10,7 @@ class App extends StatefulWidget {
       GoRoute(
         path: '/',
         builder: (context, state) {
-          return const Text('Hello');
+          return const Test();
         },
       ),
     ],
@@ -29,5 +29,19 @@ class _AppState extends State<App> {
       debugShowCheckedModeBanner: false,
       onGenerateTitle: (context) => 'Not Found',
     );
+  }
+}
+
+class Test extends StatefulWidget {
+  const Test({super.key});
+
+  @override
+  State<Test> createState() => _TestState();
+}
+
+class _TestState extends State<Test> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
