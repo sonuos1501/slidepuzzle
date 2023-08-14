@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const screenBp = Breakpoint(small: 480, normal: 720, large: 1028);
+
 class Breakpoint {
   const Breakpoint({
     required this.small,
