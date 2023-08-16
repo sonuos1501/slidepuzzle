@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:slidepuzzle/src/utils/app_infos/app_infos.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -10,6 +11,7 @@ class App extends StatefulWidget {
       GoRoute(
         path: '/',
         builder: (context, state) {
+          AppInfos.setAppTitle('Test');
           return const Test();
         },
       ),
