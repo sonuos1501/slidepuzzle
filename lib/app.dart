@@ -11,7 +11,7 @@ class App extends StatefulWidget {
       GoRoute(
         path: '/',
         builder: (context, state) {
-          AppInfos.setAppTitle('Test');
+          AppInfos.setAppTitle('Phạm Thế Sơn');
           return const Test();
         },
       ),
