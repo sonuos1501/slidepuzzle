@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:slidepuzzle/src/features/app_settings/app_setting_controller.dart';
 import 'package:slidepuzzle/src/utils/app_infos/app_infos.dart';
 
-class App extends StatefulWidget {
+class App extends ConsumerStatefulWidget {
   const App({super.key});
 
   static final router = GoRouter(
@@ -19,15 +21,18 @@ class App extends StatefulWidget {
   );
 
   @override
-  State<App> createState() => _AppState();
+  ConsumerState<App> createState() => _AppState();
 }
 
-class _AppState extends State<App> {
+class _AppState extends ConsumerState<App> {
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = ref.watch(appSettingControllerProvider.select((value) => value.isDarkTheme));
+
     return MaterialApp.router(
       routerConfig: App.router,
       debugShowCheckedModeBanner: false,
+      themeMode: isDarkTheme ? ThemeMode.dark : ThemeMode.light,
       onGenerateTitle: (context) => 'Not Found',
     );
   }
