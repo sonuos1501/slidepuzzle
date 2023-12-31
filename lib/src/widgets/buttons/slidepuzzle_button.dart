@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:slidepuzzle/src/features/audio/button_audio_controller.dart';
 import 'package:slidepuzzle/src/widgets/widgets.dart';
 
 enum SlidepuzzleButtonState { hover, idle, pressed }
@@ -40,8 +41,7 @@ class SlidepuzzleButton extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final buttonState = useState(SlidepuzzleButtonState.idle);
-    // TODO: Insert audio controller
-    // final audioController;
+    final audioController = ref.read(buttonAudioControllerProvider);
 
     return MouseRegion(
       cursor: MouseCursor.defer,
@@ -52,6 +52,7 @@ class SlidepuzzleButton extends HookConsumerWidget {
         onTapUp: (_) => buttonState.value = SlidepuzzleButtonState.idle,
         onTapCancel: () => buttonState.value = SlidepuzzleButtonState.idle,
         onTap: () {
+          audioController.clickSound();
           onPressed();
         },
         child: TweenAnimationBuilder<double>(
