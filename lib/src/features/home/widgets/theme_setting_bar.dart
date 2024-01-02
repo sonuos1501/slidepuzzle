@@ -23,6 +23,7 @@ class ThemeSettingBar extends HookConsumerWidget {
 
     final isDarkMode = ref.watch(
         appSettingControllerProvider.select((value) => value.isDarkTheme));
+    final appSettingController = ref.watch(appSettingControllerProvider);
     final playboardInfoController =
         ref.watch(playboardInfoControllerProvider.notifier);
     final playboardDefaultColor = ref
@@ -113,6 +114,32 @@ class ThemeSettingBar extends HookConsumerWidget {
                       ? const Icon(Icons.arrow_circle_up_outlined)
                       : const Icon(Icons.arrow_circle_down_outlined),
                 ),
+              ),
+              SizedBox(
+                width: 49,
+                height: 49,
+                child: IconButton(
+                  onPressed: () =>
+                      appSettingController.isDarkTheme = !isDarkMode,
+                  icon: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 3000),
+                    transitionBuilder: (child, animation) => FadeTransition(
+                      opacity: animation,
+                      child: child,
+                    ),
+                    child: isDarkMode
+                        ? const Icon(Icons.light_mode)
+                        : const Icon(Icons.dark_mode),
+                  ),
+                ),
+              ),
+              SlidepuzzleButton(
+                color: playboardDefaultColor,
+                size: ButtonSize.square,
+                onPressed: () => audioController.isMuted = !isMuted,
+                child: isMuted
+                    ? const Icon(Icons.music_off)
+                    : const Icon(Icons.music_note),
               ),
             ],
           ),
