@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:slidepuzzle/src/features/app_settings/app_setting_controller.dart';
+import 'package:slidepuzzle/src/features/home/widgets/theme_setting_bar.dart';
 import 'package:slidepuzzle/src/widgets/widgets.dart';
 
 class HomePage extends StatelessWidget {
@@ -50,9 +53,33 @@ class HomePage extends StatelessWidget {
                 ),
               ],
             ),
-            const Center(child: Text('test')),
+            const ThemeSettingBar(),
             const Gap(16),
-            const Text('test'),
+            Consumer(builder: (context, ref, child) {
+              final appSettingController =
+                  ref.watch(appSettingControllerProvider.notifier);
+              final reduceMotion = ref.watch(appSettingControllerProvider
+                  .select((value) => value.reduceMotion));
+              return TextButton(
+                onPressed: () =>
+                    appSettingController.reduceMotion = !reduceMotion,
+                child: Text.rich(
+                  TextSpan(
+                    text: 'Reduce motion: ',
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          color: Theme.of(context).colorScheme.onBackground,
+                        ),
+                    children: [
+                      TextSpan(
+                        text: reduceMotion ? 'ON' : 'OFF',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            color: Theme.of(context).colorScheme.primary),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
           ],
         ),
       ),
