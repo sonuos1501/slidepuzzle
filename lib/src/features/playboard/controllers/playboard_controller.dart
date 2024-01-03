@@ -1,3 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:slidepuzzle/src/features/playboard/models/playboard_state/playboard_state.dart';
 
-// typedef PlayboardController<T extends PlayboardS> = StateNotifier<T>;
+typedef PlayboardController<T extends PlayboardState> = StateNotifier<T>;
+
+final playboardControllerProvider =
+    StateNotifierProvider.autoDispose<PlayboardController, PlayboardState>(
+        (_) => throw UnimplementedError(
+            'Need implement controller this before access in playboard.'));
